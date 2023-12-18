@@ -46,6 +46,7 @@ add_library(JSLLib
         include/JSLLib/Runtime/GcPtr.hpp
         include/JSLLib/Runtime/MemoryManager.hpp
         include/JSLLib/Runtime/RootsSource.hpp
+        include/JSLLib/Util/Assert.hpp
 )
 target_include_directories(JSLLib PRIVATE include)
 set_target_properties(JSLLib PROPERTIES LINKER_LANGUAGE CXX)

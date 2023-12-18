@@ -45,14 +45,14 @@ namespace JSL {
         template<typename T>
         GcPtr<T> As() {
             static_assert(IsValidJslObject<T>() && "the type is not an Jsbi::Object");
-            JSBI_ASSERT(GetType() == T::GetStaticType(), "bad cast for Jsbi::Object");
+            JSL_ASSERT(GetType() == T::GetStaticType(), "bad cast for Jsbi::Object");
             return GcPtr<T>(reinterpret_cast<T *>(this));
         }
 
         template<typename T>
         GcPtr<const T> As() const {
             static_assert(IsValidJslObject<T>() && "the type is not an Jsbi::Object");
-            JSBI_ASSERT(GetType() == T::GetStaticType(), "bad cast for Jsbi::Object");
+            JSL_ASSERT(GetType() == T::GetStaticType(), "bad cast for Jsbi::Object");
             return GcPtr<const T>(reinterpret_cast<const T *>(this));
         }
 

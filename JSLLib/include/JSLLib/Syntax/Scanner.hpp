@@ -6,13 +6,14 @@
 #define SCANNER_HPP
 #include <string>
 
+#include "JSLLib/Runtime/Objects/String.hpp"
 #include "Token/Token.hpp"
 
 namespace JSL {
 
 class Scanner final {
 public:
-    Scanner(std::string::iterator start, std::string::iterator current);
+    Scanner(std::string::iterator start, std::string::iterator current, GcPtr<const String> fileName);
 
     Token Next();
 

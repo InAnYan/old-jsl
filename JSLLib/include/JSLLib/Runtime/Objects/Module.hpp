@@ -16,7 +16,7 @@ namespace JSL {
                       script(script) {
         }
 
-        [[nodiscard]] GcPtr<Function> GetScript() const {
+        [[nodiscard]] GcPtr<Function> GetScript() {
             return script;
         }
 

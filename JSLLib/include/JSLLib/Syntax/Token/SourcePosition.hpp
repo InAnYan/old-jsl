@@ -4,7 +4,10 @@
 
 #ifndef SOURCEPOSITION_HPP
 #define SOURCEPOSITION_HPP
+
 #include <string_view>
+
+#include <JSLLib/Runtime/Objects/String.hpp>
 
 namespace JSL {
 
@@ -14,12 +17,12 @@ public:
         : fileName(), line() {
     }
 
-    SourcePosition(const std::string_view& fileName, unsigned line)
+    SourcePosition(GcPtr<const String> fileName, unsigned line)
         : fileName(fileName),
           line(line) {
     }
 
-    [[nodiscard]] std::string_view GetFileName() const {
+    [[nodiscard]] GcPtr<const String> GetFileName() const {
         return fileName;
     }
 
@@ -28,7 +31,7 @@ public:
     }
 
 private:
-    std::string_view fileName;
+    GcPtr<const String> fileName;
     unsigned line;
 };
 
