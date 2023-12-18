@@ -3,6 +3,8 @@
 
 #include <string>
 
+#include <boost/spirit/include/qi.hpp>
+
 std::string func();
 
 #endif //HEADER_HPP
