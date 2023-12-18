@@ -6,18 +6,19 @@
 #define INTEGERLITERAL_HPP
 #include "JSLLib/Syntax/AST/AstNode.hpp"
 
-namespace JSL {
+namespace JSL
+{
+    class IntegerLiteralExpr final : ASTNode
+    {
+    public:
+        IntegerLiteralExpr(const SourcePosition& pos, const int number)
+            : ASTNode(pos),
+              number(number)
+        {
+        }
 
-class IntegerLiteralExpr final : ASTNode {
-public:
-    IntegerLiteralExpr(const SourcePosition& pos, const int number)
-        : ASTNode(pos),
-          number(number) {
-    }
-
-    int number;
-};
-
+        int number;
+    };
 } // JSL
 
 #endif //INTEGERLITERAL_HPP

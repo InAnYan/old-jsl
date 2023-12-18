@@ -5,9 +5,25 @@
 #ifndef BINARYOPERATION_HPP
 #define BINARYOPERATION_HPP
 
-namespace JSL {
-    enum class BinaryOperation {
-        ADD, SUBTRACT, MULTIPLY, DIVIDE
+namespace JSL
+{
+    enum class BinaryOperation
+    {
+        Add,
+        Subtract,
+        Multiply,
+        Divide,
+
+        Equal,
+        NotEqual,
+
+        Greater,
+        Less,
+        GreaterEqual,
+        LessEqual,
+
+        LogicalAnd,
+        LogicalOr
     };
 }
 

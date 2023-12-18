@@ -8,48 +8,57 @@
 #include "JSLLib/Bytecode/Chunk.hpp"
 #include "JSLLib/Runtime/ManagedObject.hpp"
 
-namespace JSL {
+namespace JSL
+{
     class Module;
 
-    class Function : ManagedObject {
+    class Function : ManagedObject
+    {
     public:
         Function(GcPtr<ManagedObject> next, GcPtr<Module> module, GcPtr<String> name,
-                         unsigned arity)
-                    : ManagedObject(next, ManagedObjectType::Function),
-                      module(module),
-                      name(name),
-                      arity(arity) {
+                 unsigned             arity)
+            : ManagedObject(next, ManagedObjectType::Function),
+              module(module),
+              name(name),
+              arity(arity)
+        {
         }
 
-        [[nodiscard]] const Chunk& GetChunk() const {
+        [[nodiscard]] const Chunk& GetChunk() const
+        {
             return chunk;
         }
 
-        [[nodiscard]] Chunk& GetChunk() {
+        [[nodiscard]] Chunk& GetChunk()
+        {
             return chunk;
         }
 
-        [[nodiscard]] GcPtr<Module> GetModule() {
+        [[nodiscard]] GcPtr<Module> GetModule()
+        {
             return module;
         }
 
-        [[nodiscard]] GcPtr<String> GetName() {
+        [[nodiscard]] GcPtr<String> GetName()
+        {
             return name;
         }
 
-        [[nodiscard]] unsigned GetArity() const {
+        [[nodiscard]] unsigned GetArity() const
+        {
             return arity;
         }
 
-        static ManagedObjectType GetStaticType() {
+        static ManagedObjectType GetStaticType()
+        {
             return ManagedObjectType::Function;
         }
 
     private:
-        Chunk chunk;
+        Chunk         chunk;
         GcPtr<Module> module;
         GcPtr<String> name;
-        unsigned arity;
+        unsigned      arity;
     };
 } // JSL
 

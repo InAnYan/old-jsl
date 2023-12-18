@@ -7,41 +7,41 @@
 #include "SourcePosition.hpp"
 #include "TokenType.hpp"
 
-namespace JSL {
+namespace JSL
+{
+    class Token final
+    {
+    public:
+        Token()
+            : type(TokenType::UnspecifiedType), pos(), str()
+        {
+        }
 
-class Token final {
-public:
-    Token()
-        : type(TokenType::UNSET), str(), pos() {
+        Token(TokenType type, const SourcePosition& pos, std::string_view str)
+            : type(type), pos(pos), str(str)
+        {
+        }
 
-    }
+        [[nodiscard]] TokenType GetType() const
+        {
+            return type;
+        }
 
-    Token(TokenType type, std::string_view str, const SourcePosition& pos)
-        : type(type),
-          str(str),
-          pos(pos) {
-    }
+        [[nodiscard]] std::string_view GetString() const
+        {
+            return str;
+        }
 
-    [[nodiscard]] TokenType GetType() const {
-        return type;
-    }
+        [[nodiscard]] SourcePosition GetPosition() const
+        {
+            return pos;
+        }
 
-    [[nodiscard]] std::string_view GetString() const {
-        return str;
-    }
-
-    [[nodiscard]] SourcePosition GetPosition() const {
-        return pos;
-    }
-
-
-
-private:
-    TokenType type;
-    std::string_view str;
-    SourcePosition pos;
-};
-
+    private:
+        TokenType        type;
+        SourcePosition   pos;
+        std::string_view str;
+    };
 } // JSL
 
 #endif //TOKEN_HPP

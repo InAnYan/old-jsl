@@ -8,14 +8,18 @@
 
 #include "Stmt.hpp"
 
-namespace JSL {
-    class ModuleAST final {
+namespace JSL
+{
+    class ModuleAST final
+    {
     public:
-        explicit ModuleAST(std::vector<Stmt>&& stmts)
-            : stmts(std::move(stmts)) {
+        explicit ModuleAST(GcPtr<String> filePath, std::vector<Stmt>&& stmts)
+            : filePath(filePath), stmts(std::move(stmts))
+        {
         }
 
-        std::vector<Stmt> stmts;
+        GcPtr<String> filePath;
+        std::vector<Stmt>   stmts;
     };
 } // JSL
 

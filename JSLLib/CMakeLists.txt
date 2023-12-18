@@ -42,11 +42,16 @@ add_library(JSLLib
         include/JSLLib/Syntax/AST/Parser.hpp
         include/JSLLib/Syntax/ErrorListener.hpp
         include/JSLLib/Syntax/Parser.hpp
-        include/JSLLib/Syntax/Compiler.hpp
         include/JSLLib/Runtime/GcPtr.hpp
         include/JSLLib/Runtime/MemoryManager.hpp
         include/JSLLib/Runtime/RootsSource.hpp
         include/JSLLib/Util/Assert.hpp
+        src/Syntax/Scanner.cpp
+        src/Syntax/Parser.cpp
+        include/JSLLib/Syntax/AST/Exprs/UnaryOperation.hpp
+        include/JSLLib/Syntax/AST/Exprs/UnaryExpr.hpp
+        include/JSLLib/Syntax/Compilers/ModuleCompiler.hpp
+        src/Compilers/ModuleCompiler.cpp
 )
 target_include_directories(JSLLib PRIVATE include)
 set_target_properties(JSLLib PROPERTIES LINKER_LANGUAGE CXX)

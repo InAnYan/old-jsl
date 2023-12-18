@@ -9,32 +9,36 @@
 
 #include <JSLLib/Runtime/Objects/String.hpp>
 
-namespace JSL {
+namespace JSL
+{
+    class SourcePosition final
+    {
+    public:
+        SourcePosition()
+            : fileName(), line()
+        {
+        }
 
-class SourcePosition final {
-public:
-    SourcePosition()
-        : fileName(), line() {
-    }
+        SourcePosition(GcPtr<const String> fileName, unsigned line)
+            : fileName(fileName),
+              line(line)
+        {
+        }
 
-    SourcePosition(GcPtr<const String> fileName, unsigned line)
-        : fileName(fileName),
-          line(line) {
-    }
+        [[nodiscard]] GcPtr<const String> GetFileName() const
+        {
+            return fileName;
+        }
 
-    [[nodiscard]] GcPtr<const String> GetFileName() const {
-        return fileName;
-    }
+        [[nodiscard]] unsigned GetLine() const
+        {
+            return line;
+        }
 
-    [[nodiscard]] unsigned GetLine() const {
-        return line;
-    }
-
-private:
-    GcPtr<const String> fileName;
-    unsigned line;
-};
-
+    private:
+        GcPtr<const String> fileName;
+        unsigned            line;
+    };
 } // JSL
 
 #endif //SOURCEPOSITION_HPP

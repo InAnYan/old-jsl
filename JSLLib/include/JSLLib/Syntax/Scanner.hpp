@@ -4,25 +4,50 @@
 
 #ifndef SCANNER_HPP
 #define SCANNER_HPP
+#include <functional>
 #include <string>
 
 #include "JSLLib/Runtime/Objects/String.hpp"
 #include "Token/Token.hpp"
 
-namespace JSL {
+namespace JSL
+{
+    class Scanner final
+    {
+    public:
+        Scanner(std::string::iterator start, std::string::iterator end, GcPtr<const String> fileName);
 
-class Scanner final {
-public:
-    Scanner(std::string::iterator start, std::string::iterator current, GcPtr<const String> fileName);
+        Token                             NextToken();
+        [[nodiscard]] GcPtr<const String> GetFileName() const;
 
-    Token Next();
+    private:
+        std::string::iterator start;
+        std::string::iterator current;
+        std::string::iterator inputEnd;
 
-private:
-    std::string::iterator start;
-    std::string::iterator current;
-    std::string::iterator end;
-};
+        GcPtr<const String> fileName;
+        unsigned            line = 1;
 
+        void SkipWhitespace();
+        void BeginNewToken();
+
+        Token ReadNumber();
+        Token ReadIdentifierOrKeyword();
+
+        char Advance();
+        void AdvanceWhile(const std::function<bool(char)>& predicate);
+
+        bool Match(char ch);
+
+        Token                        MakeToken(TokenType type);
+        [[nodiscard]] Token          MakeErrorToken(std::string_view errorMsg) const;
+        [[nodiscard]] SourcePosition MakeSourcePosition() const;
+
+        [[nodiscard]] bool IsAtEnd() const;
+        [[nodiscard]] char Peek(int offset = 0) const;
+
+        [[nodiscard]] std::string_view MakeStr() const;
+    };
 } // JSL
 
 #endif //SCANNER_HPP

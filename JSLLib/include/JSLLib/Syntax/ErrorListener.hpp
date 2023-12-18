@@ -6,8 +6,10 @@
 #define ERRORLISTENER_HPP
 #include "Token/SourcePosition.hpp"
 
-namespace JSL {
-    class ErrorListener {
+namespace JSL
+{
+    class ErrorListener
+    {
     public:
         virtual ~ErrorListener() = default;
 
