@@ -10,15 +10,15 @@
 #include "Exprs/BinaryExpr.hpp"
 #include "Exprs/IntegerLiteralExpr.hpp"
 
-namespace JSL {
+namespace JSL
+{
+    using ExprVariant = std::variant<BinaryExpr, UnaryExpr, IntegerLiteralExpr>;
 
-using ExprVariant = std::variant<BinaryExpr, UnaryExpr, IntegerLiteralExpr>;
-
-class Expr final : ExprVariant {
-public:
-    using ExprVariant::ExprVariant;
-};
-
+    class Expr final : public ExprVariant
+    {
+    public:
+        using ExprVariant::ExprVariant;
+    };
 } // JSL
 
 #endif //EXPR_HPP

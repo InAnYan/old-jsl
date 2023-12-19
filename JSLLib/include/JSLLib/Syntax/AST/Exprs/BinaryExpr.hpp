@@ -13,7 +13,7 @@ namespace JSL
 {
     class Expr;
 
-    class BinaryExpr final : ASTNode
+    class BinaryExpr final : public ASTNode
     {
     public:
         BinaryExpr(const SourcePosition& pos, std::unique_ptr<Expr> left, const BinaryOperation op,

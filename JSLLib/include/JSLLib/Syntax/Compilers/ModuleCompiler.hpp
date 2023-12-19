@@ -4,6 +4,7 @@
 
 #ifndef MODULECOMPILER_HPP
 #define MODULECOMPILER_HPP
+#include <JSLLib/Bytecode/Instruction.hpp>
 #include <JSLLib/Runtime/Objects/Module.hpp>
 #include <JSLLib/Syntax/ErrorListener.hpp>
 #include <JSLLib/Syntax/AST/ModuleAST.hpp>
@@ -32,6 +33,18 @@ namespace JSL
         void CompileStmt(const Stmt& stmt);
         void Compile(const PrintStmt& stmt);
         void Compile(const ExprStmt& stmt);
+
+        void CompileExpr(const Expr& expr);
+        void Compile(const BinaryExpr& expr);
+        void Compile(const UnaryExpr& expr);
+        void Compile(const IntegerLiteralExpr& expr);
+
+        void CompileLogicalAnd(const Expr& left, const Expr& right);
+        void CompileLogicalOr(const Expr& left, const Expr& right);
+        void CompileBasicBinOp(const BinaryExpr& expr);
+
+        void Emit(Instruction inst, const SourcePosition& pos);
+        std::size_t AddConstant(Value value, const SourcePosition& pos);
     };
 } // JSL
 

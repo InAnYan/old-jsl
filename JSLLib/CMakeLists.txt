@@ -39,7 +39,6 @@ add_library(JSLLib
         include/JSLLib/Syntax/Scanner.hpp
         include/JSLLib/Syntax/Token/Token.hpp
         include/JSLLib/Syntax/Token/TokenType.hpp
-        include/JSLLib/Syntax/AST/Parser.hpp
         include/JSLLib/Syntax/ErrorListener.hpp
         include/JSLLib/Syntax/Parser.hpp
         include/JSLLib/Runtime/GcPtr.hpp
@@ -52,6 +51,11 @@ add_library(JSLLib
         include/JSLLib/Syntax/AST/Exprs/UnaryExpr.hpp
         include/JSLLib/Syntax/Compilers/ModuleCompiler.hpp
         src/Compilers/ModuleCompiler.cpp
+        include/JSLLib/Bytecode/Instruction.hpp
+        include/JSLLib/Bytecode/InstructionList.hpp
+        include/JSLLib/Bytecode/Opcode.hpp
+        include/JSLLib/Bytecode/UnknownInst.hpp
+        include/JSLLib/Bytecode/Instructions.hpp
 )
 target_include_directories(JSLLib PRIVATE include)
 set_target_properties(JSLLib PROPERTIES LINKER_LANGUAGE CXX)

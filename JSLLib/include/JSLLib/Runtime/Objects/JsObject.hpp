@@ -4,21 +4,29 @@
 
 #ifndef JSOBJECT_HPP
 #define JSOBJECT_HPP
+
+#include <optional>
+#include <unordered_map>
+
 #include "String.hpp"
 #include "JSLLib/Runtime/ManagedObject.hpp"
 #include "JSLLib/Runtime/Value.hpp"
 
-namespace JSL {
-    class JSObject final : ManagedObject {
+namespace JSL
+{
+    class JSObject final : ManagedObject
+    {
     public:
-        JSObject(GcPtr<ManagedObject> next)
-            : ManagedObject(next, ManagedObjectType::JSObject), impl() {
+        explicit JSObject(GcPtr<ManagedObject> next)
+            : ManagedObject(next, ManagedObjectType::JSObject)
+        {
         }
 
         std::optional<Value> GetInSelf(GcPtr<String> name);
-        bool SetInSelf(GcPtr<String> name, Value val);
+        bool                 SetInSelf(GcPtr<String> name, Value val);
 
-        static ManagedObjectType GetStaticType() {
+        static ManagedObjectType GetStaticType()
+        {
             return ManagedObjectType::JSObject;
         }
 
@@ -26,8 +34,7 @@ namespace JSL {
         std::unordered_map<GcPtr<String>, Value> impl;
 
         void MarkChildren() override;
-};
-
+    };
 } // JSL
 
 #endif //JSOBJECT_HPP

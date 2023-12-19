@@ -9,7 +9,7 @@
 
 namespace JSL {
 
-class ExprStmt final : ASTNode {
+class ExprStmt final : public ASTNode {
 public:
     ExprStmt(const SourcePosition& pos, Expr&& expr)
         : ASTNode(pos),

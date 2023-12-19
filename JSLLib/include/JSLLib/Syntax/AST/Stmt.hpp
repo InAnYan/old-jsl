@@ -7,13 +7,15 @@
 #include "Stmts/ExprStmt.hpp"
 #include "Stmts/PrintStmt.hpp"
 
-namespace JSL {
-using StmtVariant = std::variant<ExprStmt, PrintStmt>;
-class Stmt final : StmtVariant {
-public:
-    using StmtVariant::StmtVariant;
-};
+namespace JSL
+{
+    using StmtVariant = std::variant<ExprStmt, PrintStmt>;
 
+    class Stmt final : public StmtVariant
+    {
+    public:
+        using StmtVariant::StmtVariant;
+    };
 } // JSL
 
 #endif //STMT_HPP

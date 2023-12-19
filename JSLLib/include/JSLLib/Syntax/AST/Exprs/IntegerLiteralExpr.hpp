@@ -8,16 +8,15 @@
 
 namespace JSL
 {
-    class IntegerLiteralExpr final : ASTNode
+    class IntegerLiteralExpr final : public ASTNode
     {
     public:
-        IntegerLiteralExpr(const SourcePosition& pos, const int number)
-            : ASTNode(pos),
-              number(number)
+        IntegerLiteralExpr(const SourcePosition& pos, const Integer number)
+            : ASTNode(pos), number(number)
         {
         }
 
-        int number;
+        Integer number;
     };
 } // JSL
 

@@ -9,7 +9,8 @@ namespace JSL
 {
     enum class UnaryOperation
     {
-        Negate
+        Negate,
+        Not,
     };
 }
 

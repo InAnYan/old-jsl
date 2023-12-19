@@ -15,18 +15,18 @@ namespace JSL
     class Scanner final
     {
     public:
-        Scanner(std::string::iterator start, std::string::iterator end, GcPtr<const String> fileName);
+        Scanner(std::string::iterator start, std::string::iterator end, GcPtr<String> fileName);
 
-        Token                             NextToken();
-        [[nodiscard]] GcPtr<const String> GetFileName() const;
+        Token                       NextToken();
+        [[nodiscard]] GcPtr<String> GetFileName();
 
     private:
         std::string::iterator start;
         std::string::iterator current;
         std::string::iterator inputEnd;
 
-        GcPtr<const String> fileName;
-        unsigned            line = 1;
+        GcPtr<String> fileName;
+        unsigned      line = 1;
 
         void SkipWhitespace();
         void BeginNewToken();

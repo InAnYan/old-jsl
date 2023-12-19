@@ -12,7 +12,7 @@ namespace JSL {
 
 class Parser final {
 public:
-    Parser(std::string::iterator start, std::string::iterator end, GcPtr<const String> fileName, ErrorListener& errorListener);
+    Parser(std::string::iterator start, std::string::iterator end, GcPtr<String> fileName, ErrorListener& errorListener);
 
     ModuleAST ParseModule();
 

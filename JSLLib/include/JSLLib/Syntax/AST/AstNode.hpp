@@ -6,20 +6,26 @@
 #define ASTNODE_HPP
 #include "JSLLib/Syntax/Token/SourcePosition.hpp"
 
-namespace JSL {
+namespace JSL
+{
+    class ASTNode
+    {
+    public:
+        explicit ASTNode(const SourcePosition& pos)
+            : pos(pos)
+        {
+        }
 
-class ASTNode {
-public:
-    explicit ASTNode(const SourcePosition& pos)
-        : pos(pos) {
-    }
+        virtual ~ASTNode() = default;
 
-    virtual ~ASTNode() = default;
+        [[nodiscard]] SourcePosition GetPosition() const
+        {
+            return pos;
+        }
 
-private:
-    SourcePosition pos;
-};
-
+    private:
+        SourcePosition pos;
+    };
 } // JSL
 
 #endif //ASTNODE_HPP

@@ -28,7 +28,7 @@ namespace JSL
         std::string_view msg;
     };
 
-    Parser::Parser(std::string::iterator start, std::string::iterator end, GcPtr<const String> fileName,
+    Parser::Parser(std::string::iterator start, std::string::iterator end, GcPtr<String> fileName,
                    ErrorListener&        errorListener)
         : scanner(start, end, fileName), errorListener(errorListener)
     {
@@ -37,7 +37,7 @@ namespace JSL
 
     ModuleAST Parser::ParseModule()
     {
-        return ModuleAST(ParseStmts());
+        return ModuleAST(scanner.GetFileName(), ParseStmts());
     }
 
     bool Parser::HadError() const
@@ -156,6 +156,11 @@ namespace JSL
             return UnaryExpr(previous.GetPosition(), UnaryOperation::Negate,
                              std::make_unique<Expr>(ParseUnary()));
         }
+        else if (Match(TokenType::Bang))
+        {
+            return UnaryExpr(previous.GetPosition(), UnaryOperation::Not,
+                             std::make_unique<Expr>(ParseUnary()));
+        }
         else
         {
             return ParsePrimary();
@@ -166,7 +171,7 @@ namespace JSL
     {
         if (Match(TokenType::Integer))
         {
-            return IntegerLiteralExpr(previous.GetPosition(), ParseNumber<int>(previous.GetString()));
+            return IntegerLiteralExpr(previous.GetPosition(), ParseNumber<Integer>(previous.GetString()));
         }
         else if (Match(TokenType::LeftParen))
         {

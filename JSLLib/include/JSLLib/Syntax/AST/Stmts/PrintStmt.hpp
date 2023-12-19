@@ -9,7 +9,7 @@
 
 namespace JSL {
 
-class PrintStmt final : ASTNode{
+class PrintStmt final : public ASTNode{
 public:
     PrintStmt(const SourcePosition& pos, Expr&& expr)
         : ASTNode(pos),

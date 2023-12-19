@@ -7,6 +7,9 @@
 
 #include "JSLLib/Util/Assert.hpp"
 
+#include <JSLLib/Runtime/GcPtr.hpp>
+#include <JSLLib/Runtime/ManagedObject.hpp>
+
 #define JSL_VALUE_TYPE_LIST(o)  \
     o(Integer, int) \
     o(ManagedObjectRef, JSL::GcPtr<JSL::ManagedObject>)

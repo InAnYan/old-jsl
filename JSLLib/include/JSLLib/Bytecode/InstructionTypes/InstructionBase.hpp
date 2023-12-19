@@ -4,13 +4,26 @@
 
 #ifndef INSTRUCTIONBASE_HPP
 #define INSTRUCTIONBASE_HPP
+#include <JSLLib/Bytecode/Opcode.hpp>
 
-namespace JSL {
+namespace JSL
+{
+    class InstructionBase
+    {
+    public:
+        InstructionBase(Opcode opcode)
+            : opcode(opcode)
+        {
+        }
 
-class InstructionBase {
+        [[nodiscard]] Opcode GetOpcode() const
+        {
+            return opcode;
+        }
 
-};
-
+    private:
+        Opcode opcode;
+    };
 } // JSL
 
 #endif //INSTRUCTIONBASE_HPP

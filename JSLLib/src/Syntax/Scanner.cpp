@@ -45,8 +45,8 @@ namespace JSL
         return ch >= a && ch <= b;
     }
 
-    Scanner::Scanner(std::string::iterator start, std::string::iterator end, GcPtr<const String> fileName)
-        : start(start.begin()), current(start), inputEnd(end), fileName((fileName))
+    Scanner::Scanner(std::string::iterator start, std::string::iterator end, GcPtr<String> fileName)
+        : start(start), current(start), inputEnd(end), fileName(fileName)
     {
     }
 
@@ -222,7 +222,7 @@ namespace JSL
         return {fileName, line};
     }
 
-    GcPtr<const String> Scanner::GetFileName() const
+    GcPtr<String> Scanner::GetFileName()
     {
         return fileName;
     }

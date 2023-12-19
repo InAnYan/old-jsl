@@ -12,7 +12,7 @@ namespace JSL
 {
     class Expr;
 
-    class UnaryExpr final : ASTNode
+    class UnaryExpr final : public ASTNode
     {
     public:
         UnaryExpr(const SourcePosition& pos, UnaryOperation op, std::unique_ptr<Expr> expr)
@@ -20,7 +20,6 @@ namespace JSL
         {
         }
 
-    private:
         UnaryOperation        op;
         std::unique_ptr<Expr> expr;
     };
