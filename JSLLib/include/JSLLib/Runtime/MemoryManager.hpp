@@ -11,68 +11,65 @@
 #include "RootsSource.hpp"
 #include "Value.hpp"
 
-namespace JSL {
-
-class MemoryManager final {
-public:
-    MemoryManager() = default;
-    explicit MemoryManager(RootsSource&& fn);
-
-    ~MemoryManager();
-
-    MemoryManager(const MemoryManager& other) = delete;
-    MemoryManager(MemoryManager&& other) = delete;
-
-    MemoryManager& operator=(const MemoryManager& other) = delete;
-    MemoryManager& operator=(MemoryManager&& other) = delete;
-
-    void OnGC();
-    void OffGC();
-
-    [[nodiscard]] bool IsGC() const;
-
-    template <typename T, typename... Args>
-    GcPtr<T> AllocateObject(Args&& ... args)
+namespace JSL
+{
+    class MemoryManager final
     {
-        GcPtr<T> obj(new T(objects, std::forward<Args&&>(args)...));
+    public:
+        MemoryManager() = default;
+        explicit MemoryManager(RootsSource&& fn);
 
-        LogObject("AllocateObject", obj);
+        ~MemoryManager();
 
-        objects = obj;
+        MemoryManager(const MemoryManager& other) = delete;
+        MemoryManager(MemoryManager&& other)      = delete;
 
-        return obj;
-    }
+        MemoryManager& operator=(const MemoryManager& other) = delete;
+        MemoryManager& operator=(MemoryManager&& other)      = delete;
 
-    void CollectGarbageIfNeeded();
+        void OnGC();
+        void OffGC();
+
+        [[nodiscard]] bool IsGCOn() const;
+
+        template<typename T, typename... Args>
+        GcPtr<T> AllocateObject(Args&&... args)
+        {
+            GcPtr<T> obj(new T(objects, std::forward<Args &&>(args)...));
+
+            LogObject("AllocateObject", obj);
+
+            objects = obj;
+
+            return obj;
+        }
+
+        void CollectGarbageIfNeeded();
 
 
-     static void MarkObject(GcPtr<ManagedObject> obj);
+        static void MarkObject(GcPtr<ManagedObject> obj);
 
-     static void MarkValue(Value val);
+        static void MarkValue(Value val);
 
+    private:
+        bool gcAllow = false;
 
-private:
-    bool gcAllow = false;
+        RootsSource roots = []()
+        {
+        };
 
-    RootsSource roots = []()
-    {
+        GcPtr<ManagedObject> objects = nullptr;
+
+        void DeleteAllObjects();
+
+        static void LogObject(std::string_view str, GcPtr<ManagedObject> obj);
+
+        static void LogStages(std::string_view str);
+
+        void DeleteObject(GcPtr<ManagedObject> obj);
+
+        static std::ostream& Log(std::string_view str);
     };
-
-    GcPtr<ManagedObject> objects = nullptr;
-
-    void DeleteAllObjects();
-
-    static void LogObject(std::string_view str, GcPtr<ManagedObject> obj);
-
-    static void LogStages(std::string_view str);
-
-    void DeleteObject(GcPtr<ManagedObject> obj);
-
-    static std::ostream& Log(std::string_view str);
-};
 }
-};
-
-} // JSL
 
 #endif //MEMORYMANAGER_HPP

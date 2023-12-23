@@ -5,6 +5,7 @@
 #ifndef SIMPLEINSTRUCTION_HPP
 #define SIMPLEINSTRUCTION_HPP
 
+#include <vector>
 #include <JSLLib/Bytecode/InstructionTypes/InstructionBase.hpp>
 #include <JSLLib/Bytecode/Opcode.hpp>
 
@@ -16,6 +17,16 @@ namespace JSL
         explicit SimpleInstruction(Opcode opcode)
             : InstructionBase(opcode)
         {
+        }
+
+        void Write(std::vector<uint8_t>& array) const
+        {
+            array.push_back(GetOpcode());
+        }
+
+        [[nodiscard]] static std::size_t Size()
+        {
+            return 1;
         }
     };
 
@@ -31,7 +42,7 @@ namespace JSL
     };
 
     #define JSL_DEFINE_INSTRUCTION_Simple(name) \
-        class name##Inst : public SimpleInstructionTemplate<name##Opcode> {}
+        class name##Inst : public SimpleInstructionTemplate<Opcode##name> {}
 } // JSL
 
 #endif //SIMPLEINSTRUCTION_HPP

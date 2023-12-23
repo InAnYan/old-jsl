@@ -5,6 +5,7 @@
 #ifndef CONSTANTINSTRUCTION_HPP
 #define CONSTANTINSTRUCTION_HPP
 
+#include <vector>
 #include <JSLLib/Bytecode/InstructionTypes/InstructionBase.hpp>
 #include <JSLLib/Bytecode/Opcode.hpp>
 
@@ -23,6 +24,17 @@ namespace JSL
             return index;
         }
 
+        void Write(std::vector<uint8_t>& array) const
+        {
+            array.push_back(GetOpcode());
+            array.push_back(index);
+        }
+
+        [[nodiscard]] static std::size_t Size()
+        {
+            return 2;
+        }
+
     private:
         uint8_t index;
     };
@@ -39,8 +51,8 @@ namespace JSL
     };
 
     #define JSL_DEFINE_INSTRUCTION_Constant(name) \
-        class name##Inst : public ConstantInstructionTemplate<name##Opcode> \
-        { using ConstantInstructionTemplate<name##Opcode>::ConstantInstructionTemplate; }
+        class name##Inst : public ConstantInstructionTemplate<Opcode##name> \
+        { using ConstantInstructionTemplate<Opcode##name>::ConstantInstructionTemplate; }
 } // JSL
 
 #endif //CONSTANTINSTRUCTION_HPP

@@ -4,85 +4,111 @@
 
 #ifndef VALUE_HPP
 #define VALUE_HPP
+#include <JSLLib/Runtime/PrintFlags.hpp>
+
 #include "ValueType.hpp"
 
-namespace JSL {
-
-class Value {
-public:
-    template <typename T>
-    explicit Value(T value)
-        : type(TypeToValueType<T>()), as(value)
+namespace JSL
+{
+    class Value
     {
-
-    }
-
-    template <typename T>
-    T As() const
-    {
-        LOX_ASSERT(Is<T>(), "JSL::Value bad cast");
-        return as.Get<T>();
-    }
-
-    [[nodiscard]] bool Is(ValueType type) const
-    {
-        return this->type == type;
-    }
-
-    template <typename T>
-    [[nodiscard]] bool Is() const
-    {
-        return type == TypeToValueType<T>();
-    }
-
-    template <class Visitor>
-    void Visit(Visitor&& visitor) const
-    {
-        switch (type)
+    public:
+        template<typename T>
+        explicit Value(T value)
+            : type(TypeToValueType<T>()), as(value)
         {
-            case ValueType::Integer:       visitor(as.integer); break;
-            case ValueType::ManagedObjectRef: visitor(as.object);  break;
-        }
-    }
-
-    [[nodiscard]] ValueType GetType() const
-    {
-        return type;
-    }
-
-    bool operator==(const Value& value) const;
-
-private:
-    ValueType type;
-    union As
-    {
-        explicit As(Integer val) : integer(val) {}
-        explicit As(ManagedObjectRef val) : object(val) {}
-
-        Integer integer;
-        ManagedObjectRef object;
-
-        template <typename T>
-        T Get() const
-        {
-            JSL_ASSERT(false, "wrong Value::As get");
-            return T();
         }
 
-        template <>
-        Integer Get<Integer>() const
+        template<typename T>
+        T As() const
         {
-            return integer;
+            LOX_ASSERT(Is<T>(), "JSL::Value bad cast");
+            return as.Get<T>();
         }
 
-        template <>
-        ManagedObjectRef Get<ManagedObjectRef>() const
+        [[nodiscard]] bool Is(ValueType type) const
         {
-            return object;
+            return this->type == type;
         }
-    } as;
-};
 
+        template<typename T>
+        [[nodiscard]] bool Is() const
+        {
+            return type == TypeToValueType<T>();
+        }
+
+        template<class Visitor>
+        void Visit(Visitor&& visitor) const
+        {
+            switch (type)
+            {
+            case ValueType::Integer:
+                visitor(as.integer);
+                break;
+            case ValueType::ManagedObjectRef:
+                visitor(as.object);
+                break;
+            }
+        }
+
+        [[nodiscard]] ValueType GetType() const
+        {
+            return type;
+        }
+
+        bool operator==(const Value& value) const;
+
+        void Print(PrintFlags flags, std::ostream& out) const
+        {
+            switch (type)
+            {
+            case ValueType::Integer:
+                out << as.integer;
+                break;
+            case ValueType::ManagedObjectRef:
+                as.object->Print(flags, out);
+                break;
+            }
+        }
+
+    private:
+        ValueType type;
+
+        union As
+        {
+            explicit As(Integer val)
+                : integer(val)
+            {
+            }
+
+            explicit As(ManagedObjectRef val)
+                : object(val)
+            {
+            }
+
+            Integer          integer;
+            ManagedObjectRef object;
+
+            template<typename T>
+            T Get() const
+            {
+                JSL_ASSERT(false, "wrong Value::As get");
+                return T();
+            }
+
+            template<>
+            Integer Get<Integer>() const
+            {
+                return integer;
+            }
+
+            template<>
+            ManagedObjectRef Get<ManagedObjectRef>() const
+            {
+                return object;
+            }
+        } as;
+    };
 } // JSL
 
 #endif //VALUE_HPP

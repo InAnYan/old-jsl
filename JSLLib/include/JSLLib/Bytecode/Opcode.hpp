@@ -6,6 +6,7 @@
 #define OPCODE_HPP
 
 #include <cstdint>
+#include <iostream>
 
 #include "InstructionList.hpp"
 
@@ -14,12 +15,14 @@ namespace JSL
     enum Opcode : uint8_t
     {
         #define JSL_INSTRUCTION_OPCODE(name, type) \
-            name##Opcode,
+            Opcode##name,
 
         JSL_INSTRUCTION_LIST(JSL_INSTRUCTION_OPCODE)
 
         #undef JSL_INSTRUCTION_OPCODE
     };
+
+    std::ostream& operator<<(std::ostream& out, Opcode opcode);
 }
 
 #endif //OPCODE_HPP

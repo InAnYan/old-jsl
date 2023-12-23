@@ -6,13 +6,15 @@
 #define INSTRUCTION_HPP
 
 #include <variant>
+#include <iostream>
+#include <vector>
 
-#include <JSLLib/Bytecode/InstructionList.hpp>
+#include <JSLLib/Bytecode/Instructions.hpp>
 #include <JSLLib/Bytecode/UnknownInst.hpp>
 
 namespace JSL
 {
-    using Instruction = std::variant<
+    using InstructionVariant = std::variant<
         #define JSL_INSTRUCTION_VARIANT(name, type) \
             name##Inst,
 
@@ -21,6 +23,15 @@ namespace JSL
 
         #undef JSL_INSTRUCTION_VARIANT
     >;
+
+    class Instruction : public InstructionVariant
+    {
+    public:
+        using InstructionVariant::InstructionVariant;
+
+        void Write(std::vector<uint8_t>& array);
+        std::size_t Size();
+    };
 }
 
 #endif //INSTRUCTION_HPP

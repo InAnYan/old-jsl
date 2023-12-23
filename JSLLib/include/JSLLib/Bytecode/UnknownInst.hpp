@@ -4,12 +4,12 @@
 
 #ifndef UNKNOWNINST_HPP
 #define UNKNOWNINST_HPP
+
 #include <JSLLib/Bytecode/Opcode.hpp>
+#include <JSLLib/Bytecode/InstructionTypes/SimpleInstruction.hpp>
 
 namespace JSL
 {
-    class SimpleInstruction;
-
     class UnknownInst : public SimpleInstruction
     {
     public:

@@ -9,6 +9,15 @@
     o(PushConstant, Constant)   \
     o(Pop, Simple)              \
     o(Print, Simple)            \
-    o(Return, Simple)
+    o(Return, Simple)           \
+    o(Negate, Simple)           \
+    o(Not, Simple)              \
+    o(Add, Simple)              \
+    o(Subtract, Simple)         \
+    o(Multiply, Simple)         \
+    o(Divide, Simple)           \
+    o(Equal, Simple)            \
+    o(Greater, Simple)          \
+    o(Less, Simple)
 
 #endif //INSTRUCTIONLIST_HPP

@@ -45,6 +45,8 @@ namespace JSL
 
         void Emit(Instruction inst, const SourcePosition& pos);
         std::size_t AddConstant(Value value, const SourcePosition& pos);
+
+        Chunk& GetChunk();
     };
 } // JSL
 

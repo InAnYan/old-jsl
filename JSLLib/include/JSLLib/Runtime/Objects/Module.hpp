@@ -9,16 +9,18 @@
 
 namespace JSL
 {
-    class Module final : ManagedObject
+    class Module final : public ManagedObject
     {
     public:
         Module(GcPtr<ManagedObject> next, VirtualMachine& vm, GcPtr<String> filePath)
             : ManagedObject(next, ManagedObjectType::Module),
               vars(vm.AllocateEmptyObject()),
               exports(vm.AllocateEmptyObject()),
-              script(vm.AllocateObject<Function>(this, filePath, 0))
+              script(vm.AllocateObject<Function>(GcPtr<Module>(this), filePath, filePath, 0))
         {
         }
+
+        void Print(PrintFlags flags, std::ostream& out) override;
 
         [[nodiscard]] GcPtr<Function> GetScript()
         {

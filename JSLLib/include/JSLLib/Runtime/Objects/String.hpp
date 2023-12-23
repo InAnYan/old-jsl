@@ -20,6 +20,8 @@ namespace JSL
         {
         }
 
+        void Print(PrintFlags flags, std::ostream& out) override;
+
         [[nodiscard]] const std::string& GetCppString() const
         {
             return impl;

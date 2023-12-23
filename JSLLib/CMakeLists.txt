@@ -50,12 +50,23 @@ add_library(JSLLib
         include/JSLLib/Syntax/AST/Exprs/UnaryOperation.hpp
         include/JSLLib/Syntax/AST/Exprs/UnaryExpr.hpp
         include/JSLLib/Syntax/Compilers/ModuleCompiler.hpp
-        src/Compilers/ModuleCompiler.cpp
+        src/Syntax/Compilers/ModuleCompiler.cpp
         include/JSLLib/Bytecode/Instruction.hpp
         include/JSLLib/Bytecode/InstructionList.hpp
         include/JSLLib/Bytecode/Opcode.hpp
         include/JSLLib/Bytecode/UnknownInst.hpp
         include/JSLLib/Bytecode/Instructions.hpp
+        src/Bytecode/LinesTable.cpp
+        src/Bytecode/Chunk.cpp
+        src/Bytecode/Instruction.cpp
+        src/Bytecode/Instruction.cpp
+        include/JSLLib/Bytecode/Disassembler.hpp
+        src/Bytecode/Disassembler.cpp
+        src/Bytecode/Disassembler.cpp
+        include/JSLLib/Runtime/PrintFlags.hpp
+        include/JSLLib/Bytecode/InstructionReader.hpp
+        src/Bytecode/Opcode.cpp
+        src/Bytecode/InstructionReader.cpp
 )
 target_include_directories(JSLLib PRIVATE include)
 set_target_properties(JSLLib PROPERTIES LINKER_LANGUAGE CXX)

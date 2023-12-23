@@ -22,6 +22,8 @@ namespace JSL
         {
         }
 
+        void Print(PrintFlags flags, std::ostream& out) override;
+
         std::optional<Value> GetInSelf(GcPtr<String> name);
         bool                 SetInSelf(GcPtr<String> name, Value val);
 

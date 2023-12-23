@@ -19,7 +19,7 @@ namespace JSL
         {
         }
 
-        SourcePosition(GcPtr<const String> fileName, unsigned line)
+        SourcePosition(GcPtr<const String> fileName, std::size_t line)
             : fileName(fileName),
               line(line)
         {
@@ -30,14 +30,14 @@ namespace JSL
             return fileName;
         }
 
-        [[nodiscard]] unsigned GetLine() const
+        [[nodiscard]] std::size_t GetLine() const
         {
             return line;
         }
 
     private:
         GcPtr<const String> fileName;
-        unsigned            line;
+        std::size_t         line;
     };
 } // JSL
 

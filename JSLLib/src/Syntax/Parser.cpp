@@ -167,6 +167,7 @@ namespace JSL
         }
     }
 
+    // ReSharper disable once CppNotAllPathsReturnValue
     Expr Parser::ParsePrimary()
     {
         if (Match(TokenType::Integer))
